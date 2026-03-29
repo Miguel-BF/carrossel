@@ -13,10 +13,9 @@ html, body {
   font-family: Arial, sans-serif;
 }
 
-/* CARROSSEL FULL */
 .carousel {
   width: 100vw;
-  height: 90vh; /* melhor para Google Sites */
+  height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,7 +23,6 @@ html, body {
   perspective: 1200px;
 }
 
-/* SLIDES */
 .slide {
   position: absolute;
   width: 65%;
@@ -36,33 +34,14 @@ html, body {
   opacity: 0;
   box-shadow: 0 25px 60px rgba(0,0,0,0.6);
   overflow: hidden;
+  cursor: pointer;
 }
 
-/* POSIÇÕES */
-.center {
-  transform: translateX(0) scale(1);
-  opacity: 1;
-  z-index: 3;
-}
+.center { transform: translateX(0) scale(1); opacity: 1; z-index: 3; }
+.left { transform: translateX(-70%) scale(0.8); opacity: 0.5; z-index: 2; }
+.right { transform: translateX(70%) scale(0.8); opacity: 0.5; z-index: 2; }
+.hidden { opacity: 0; }
 
-.left {
-  transform: translateX(-70%) scale(0.8);
-  opacity: 0.5;
-  z-index: 2;
-}
-
-.right {
-  transform: translateX(70%) scale(0.8);
-  opacity: 0.5;
-  z-index: 2;
-}
-
-.hidden {
-  opacity: 0;
-  z-index: 1;
-}
-
-/* OVERLAY */
 .overlay {
   position: absolute;
   width: 100%;
@@ -70,7 +49,6 @@ html, body {
   background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
 }
 
-/* TEXTO */
 .text {
   position: absolute;
   bottom: 25px;
@@ -87,18 +65,6 @@ html, body {
   margin: 5px 0 0;
   font-size: 15px;
 }
-
-/* RESPONSIVO */
-@media (max-width: 768px) {
-  .slide {
-    width: 85%;
-    height: 300px;
-  }
-
-  .left, .right {
-    opacity: 0;
-  }
-}
 </style>
 </head>
 
@@ -106,7 +72,7 @@ html, body {
 
 <div class="carousel">
 
-  <div class="slide" style="background-image: url('https://picsum.photos/1200/600?1')">
+  <div class="slide" onclick="goTo('pwas.html')" style="background-image: url('https://images.unsplash.com/photo-1551650975-87deedd944c3')">
     <div class="overlay"></div>
     <div class="text">
       <h2>PWAs</h2>
@@ -114,15 +80,15 @@ html, body {
     </div>
   </div>
 
-  <div class="slide" style="background-image: url('https://picsum.photos/1200/600?2')">
+  <div class="slide" onclick="goTo('cloud.html')" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa')">
     <div class="overlay"></div>
     <div class="text">
       <h2>Cloud Computing</h2>
-      <p>AWS, Azure e Google Cloud</p>
+      <p>Escalabilidade na nuvem</p>
     </div>
   </div>
 
-  <div class="slide" style="background-image: url('https://picsum.photos/1200/600?3')">
+  <div class="slide" onclick="goTo('web3.html')" style="background-image: url('https://images.unsplash.com/photo-1639762681485-074b7f938ba0')">
     <div class="overlay"></div>
     <div class="text">
       <h2>Web3</h2>
@@ -130,7 +96,7 @@ html, body {
     </div>
   </div>
 
-  <div class="slide" style="background-image: url('https://picsum.photos/1200/600?4')">
+  <div class="slide" onclick="goTo('arquitetura.html')" style="background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31')">
     <div class="overlay"></div>
     <div class="text">
       <h2>Arquitetura</h2>
@@ -163,6 +129,10 @@ function updateSlides() {
 function nextSlide() {
   index = (index + 1) % slides.length;
   updateSlides();
+}
+
+function goTo(page) {
+  window.location.href = page;
 }
 
 setInterval(nextSlide, 3500);
