@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  background: #111;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+.carousel {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  perspective: 1000px;
+}
+
+.slide {
+  position: absolute;
+  width: 60%;
+  height: 350px;
+  border-radius: 20px;
+  background-size: cover;
+  background-position: center;
+  transition: all 0.8s ease;
+  opacity: 0;
+}
+
+.center {
+  transform: translateX(0) scale(1);
+  opacity: 1;
+  z-index: 3;
+}
+
+.left {
+  transform: translateX(-60%) scale(0.8);
+  opacity: 0.5;
+  z-index: 2;
+}
+
+.right {
+  transform: translateX(60%) scale(0.8);
+  opacity: 0.5;
+  z-index: 2;
+}
+
+.hidden {
+  opacity: 0;
+  z-index: 1;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  background: rgba(0,0,0,0.4);
+}
+
+.text {
+  position: absolute;
+  bottom: 20px;
+  left: 30px;
+  color: white;
+}
+
+.text h2 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.text p {
+  margin: 5px 0 0;
+  font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="carousel">
+
+  <div class="slide" style="background-image: url('https://picsum.photos/800/400?1')">
+    <div class="overlay"></div>
+    <div class="text">
+      <h2>PWAs</h2>
+      <p>Apps direto no navegador</p>
+    </div>
+  </div>
+
+  <div class="slide" style="background-image: url('https://picsum.photos/800/400?2')">
+    <div class="overlay"></div>
+    <div class="text">
+      <h2>Cloud</h2>
+      <p>Escalabilidade total</p>
+    </div>
+  </div>
+
+  <div class="slide" style="background-image: url('https://picsum.photos/800/400?3')">
+    <div class="overlay"></div>
+    <div class="text">
+      <h2>Web3</h2>
+      <p>Internet descentralizada</p>
+    </div>
+  </div>
+
+  <div class="slide" style="background-image: url('https://picsum.photos/800/400?4')">
+    <div class="overlay"></div>
+    <div class="text">
+      <h2>Arquitetura</h2>
+      <p>Microsserviços vs Monólitos</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let slides = document.querySelectorAll('.slide');
+let index = 0;
+
+function updateSlides() {
+  slides.forEach((slide, i) => {
+    slide.classList.remove('center', 'left', 'right', 'hidden');
+
+    if (i === index) {
+      slide.classList.add('center');
+    } else if (i === (index - 1 + slides.length) % slides.length) {
+      slide.classList.add('left');
+    } else if (i === (index + 1) % slides.length) {
+      slide.classList.add('right');
+    } else {
+      slide.classList.add('hidden');
+    }
+  });
+}
+
+function nextSlide() {
+  index = (index + 1) % slides.length;
+  updateSlides();
+}
+
+setInterval(nextSlide, 3000);
+updateSlides();
+</script>
+
+</body>
+</html>
